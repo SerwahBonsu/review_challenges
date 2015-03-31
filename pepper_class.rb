@@ -10,7 +10,7 @@
 
 class Pepper
 
-  # w/out named arg
+  # w/out named argument
   # def initialize(pep_stuff)
   #   @color = pep_stuff[0]
   #   @spice_factor = pep_stuff[1]
@@ -18,7 +18,7 @@ class Pepper
   # end
 
 
-# w/ named arg
+# w/ named argument
   def initialize(pep_stuff = {})
     @color = pep_stuff[:color]
     @spice_factor = pep_stuff[:spice_factor]
@@ -28,13 +28,13 @@ end
 
 class PepperPlant
 
-  # w/o named arg
+  # w/o named argument
   # def initialize(plantstuff)
   #   @age = plantstuff[0]
   #   @yield = plantstuff[1]
   # end
 attr_reader :age
-# w/ named arg
+# w/ named argument
   def initialize(plantstuff = {})
     @age = plantstuff[:age]
     @pepper_yield = plantstuff[:yield]
