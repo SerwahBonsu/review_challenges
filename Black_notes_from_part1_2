@@ -1,0 +1,239 @@
+
+**Method Syntax**
+A few things to consider about the dot-based message-sending syntax:
+
+Example:
+
+  def obj.talk
+    puts "I am an object."
+    puts "(Do you object?)"
+  end
+
+Notes
+  ■ The dot (.) is the message-sending operator. The message on the right is sent to the object (or receiver, as it’s often called in this role) on the left.
+  ■ The receiver can be, and often is, represented by a variable that stands in for an   object. But a receiver can also be a literal object construct—for example, a string in quotation marks.
+  ■ In practice, the message being sent is almost always the name of a method (like talk, the method defined earlier). The object always tries to act on the assumption that the message is the name of a method. If there’s no method by that name, error-handling measures are taken.
+
+**Method Arguments**
+Key terms:
+formal parameters: the variables listed in the method definition are the method’s formal parameters
+
+Arguments:
+the variables listed in the method definition are the method’s formal parameters
+
+Example:
+
+def obj.c2f(c)
+ c * 9.0 / 5 + 32
+end
+
+>> "c" is the formal parameter
+
+puts obj.c2f(100)
+
+>> 100 is the argument
+
+**Return Values of Methods**
+
+  Arithmetic expressions evaluate to their results
+    2+2 => 4
+
+  A simple, literal string (in quotation marks) evaluates to itself
+    Hello => Hello
+
+  Strings can be "added" to each other (concantenated) with the plus sign.
+    "Hello" + "there" => "Hello there"
+
+  When you assign to a variable, the whole assignment evaluates to the value you've assigned.
+    c = 100 => 100
+
+  Multiplication and division are performed before addition in expressions, thus affecting the outcome.
+    c*9/5+32=>212
+
+    A method call is an expression.
+      obj.c2f(100) => 212
+
+**String Interpolation**
+The string interpolation operator enables you to drop anything into a string. Some examples:
+  - a variable
+  - a return value of a method
+Strings can be concatenated -- read combined -- with the plus sign.
+
+Example of how code looks using string interpolation:
+  puts "This ticket is for: #{ticket.event}, at #{ticket.venue}." +
+   "The performer is #{ticket.performer}." +
+   "The seat is #{ticket.seat}, " +
+   "and it costs $#{"%.2f." % ticket.price}"
+
+How it works:
+  - Whatever’s inside the interpolation operator #{...} gets calculated separately, and the results of the calculation are inserted into the string.
+  - When you run these lines, you won’t see the #{...} operator on your screen; instead, you’ll see the results of calculating or evaluating what was between the curly braces.
+
+**Boolean values**
+>>Every object in ruby returns true except for:
+  - object false
+  - nonentity object of nil
+>>Everything in Ruby has a Boolean value, and sometimes it’s not what you might expect
+
+**Object IDs**
+All ruby objects have a unique ID associated with them.
+
+In the example below a and b have the same id:
+  a = Object.new
+  b = a
+  puts "a's id is #{a.object_id} and b's id is #{b.object_id}."
+
+However, two strings that are identical do not. See the example below:
+  string_1 = "Hello"
+  string_2 = "Hello"
+  puts "string_1's id is #{string_1.object_id}."
+  puts "string_2's id is #{string_2.object_id}."
+
+irb returned the following:
+      string_1's id is 70214940156360.
+      string_2's id is 70214940156340.
+
+The metaphor used was that it is like having two copies of the same book. Same text -- same everything. But if one is burned, that doesn't affect the other.
+
+**Respond_to? Method**
+Often, for many different reasons, code results in an error. You can add the respond_to? method to check if it will result in an error before running it?
+
+For Example:
+  obj = Object.new
+  obj.talk
+
+Returns an error:
+  NoMethodError: undefined method `talk' for #<Object:0x00000102836550>
+
+You can run respond_to? and if you receive the message after else, you know it doesn't run.
+  obj = Object.new
+  if obj.respond_to?("talk")
+   obj.talk
+  else
+   puts "Sorry, the object doesn't understand the 'talk' message."
+  end
+
+**Send Method**
+Send allows users to request return values of methods in a program from the command line. It is kind of like ARGV.
+
+
+Adding this to the bottom of the code on tickets enables a user to be asked for "Information desired:" and to enter date, venue, event, performer, seat, price etc. and get the actual return value:
+
+    print "Information desired: "
+    request = gets.chomp
+    if ticket.respond_to?(request)
+     puts ticket.send(request)
+    else
+     puts "No such information available"
+    end
+
+>> A note on send
+    >> Ruby knows that a lot of things can potentially be called send within an app. Thus, the method send can be swapped for __send__ and public_send. public_send is safer because it doesn't allow for users to call on private methods.
+
+    >> Be careful about sending arbitrary messages to objects, especially if those messages are based on user choice or input.
+
+**Method Arguments**
+
+Do's and Don'ts
+
+Don't:
+- call three arguments on a one-argument method:
+
+    obj = Object.new
+    def obj.one_arg(x)
+     puts "I require one and only one argument!"
+    end
+    obj.one_arg(1,2,3)
+
+- put the *x to the left of a default variable; that is not legal ruby
+
+  Example:
+  def broken_args(x,*y,z=1)
+  end
+
+  OR
+
+def broken_args(x, *y, z=1, a, b)
+  end
+
+Do:
+add * (called splat, star or argument sponge) if you need to supply multiple argumes
+  def two_or_more(a,b,*c)
+   puts "I require two or more arguments!"
+   puts "And sure enough, I got: "
+   p a, b, c
+  end
+
+  However, if you call splat after calling two required arguments, be clear on how it will return the rest:
+  two_or_more(1,2,3,4,5) =>
+                            I require two or more arguments!
+                            And sure enough, I got:
+                            1
+                            2
+                            [3, 4, 5]
+ Also note: using puts or print in place of p would not have returned the array, but the elements.
+
+Default arguments are also important to understand:
+
+def default_args(a,b,c=1)
+ puts "Values of variables: ",a,b,c
+end
+
+OPTION 1:
+default_args(3,2) =>
+Values of variables:
+3
+2
+1
+
+OPTION 2:
+default_args(4,5,6) =>
+Values of variables:
+4
+5
+6
+
+Thus, if you don't supply a number at the position the default value is at, it will return the default(OPTION 1). But if you do, it will return the new value (OPTION 2)
+
+Most important thing about argument: everything is bound to an object, even if you have one parameter as a star i.e. *x and don't explicitly pass an argument in it's place that will return an empty array
+
+**Variables, Objects and References**
+
+When you change the value of one object with the method replace, it replaces the values of both objects:
+
+      EXAMPLE:
+      str = "Hello"
+      abc = str
+      # str.replace("Goodbye")
+      abc.replace("hiccups")
+      puts str
+      puts abc
+      # replace will replace the value of str AND abc
+      =>
+      hiccups
+      hiccups
+
+BUT if you change the value of one object through re-assignment, the variables part ways:
+      EXAMPLE:
+      str = "Hello"
+      abc = str
+      str = "Goodbye"
+      puts str
+      puts abc
+
+      This time the output is:
+      Goodbye
+      Hello
+
+  IMPORTANT NOTE: These rules for variable assignment also apply to Class, global, and instance variables and constants.
+
+  Ruby gives you some techniques for protecting objects from being changed, should you wish or need to do so.
+
+  dup
+    s = "Original string content!"
+    change_string(s.dup)
+    puts s
+    =>
+    # Original string content!
+
+  freeze

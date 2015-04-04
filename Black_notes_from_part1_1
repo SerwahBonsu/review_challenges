@@ -1,0 +1,139 @@
+
+*Arithmetic and operators*
+
+  All these operations work on integers or floatingpoint
+  numbers (floats). Mixing integers and floats
+  together, as some of the examples do, produces a
+  floating-point result
+
+    2 + 3 (addition)
+    2 – 3 (subtraction)
+    2 * 3 (multiplication)
+    2 / 3 (division)
+    10.3 + 20.25
+    103 - 202.5
+    32.9 * 10
+    100.0 / 0.23
+
+*Assignment*
+
+  This operation binds a local variable (on the left) to
+  an object (on the right).
+
+  x = 1
+  string = "Hello"
+
+*Convert a numeric string to a number*
+
+    x = "100".to_i
+    s = "100"
+    x = s.to_i
+
+    To perform arithmetic, you have to make sure you
+    have numbers rather than strings of characters.
+    to_i performs string-to-integer conversion.
+
+    **Puts vs. Print vs. p**
+      >>puts
+        adds a newline to the string it outputs if there
+        isn’t one at the end already;
+
+    >>print
+      doesn't add a new line; print prints exactly what it’s told to and leaves the cursor at the end.
+
+    >>p
+      outputs an inspect string, which may contain extra
+      information about what it’s printing.
+
+    **Special Objects: true, false, and nil**
+
+      >>true vs. false
+        The objects true and false often serve as return values for conditional expressions.
+
+      >>nil
+        The object nil is a kind of “nonobject” indicating the absence of a value or result.
+
+      >> What results causes an expression to fail of these
+        special objects:
+          >>fail
+          >>nil
+
+      What results cause an expression to succeed?
+          >>true
+          >>0
+          >>empty strings : ""
+
+
+**What is self?**
+
+Self is a default object. Self is a role that different objects play, depending on the execution context. Method calls that don't specify an object are called on self.
+
+
+**Method**
+
+A method is a named executable routine whose execution the object has the ability to trigger.
+>>Note on objects
+  Ruby sees all data structures -- from arrays to strings to integers as objects.s
+>>Objects are represented by literal constructors -- such as quotation marks for strings or by variables that they have been bound
+>>Message sending is achieved via the special dot operator in that the message to the right of the dot is sent to the object to the left of the dot
+  Example:
+    x = "100".to_i
+
+    object being called on: the string "100"
+    method: to_i
+    argument: none
+>>Methods can take arguments, which are also objects.
+  Example:
+    x = "100".to_i(9)
+
+    9 is the argument to this method; use parentheses to pass arguments just to be safe
+
+    object being called on: the string "100"
+    method: to_i
+    argument: 9
+
+>>Some exceptions to the dot rule with method calls
+  some methods take the form of bareword-style invocations
+  Example:
+  puts "Hello."
+
+    object being called on: self
+    method: puts
+    argument: "Hello."
+
+**Class**
+
+Classes define clusters of behaviors or functionality and every object is an instan ce of exactly one class.
+  Ruby has built-in classes which represent foundational data types:
+    >> String
+    >> Array
+    >> Fixnum
+- Every time you create a string object you have created an instance of the String class
+- A class creates an object through the process known as instantiation; but the object,thereafter, has a life of its own and after that an object has a life of its own.
+
+**Running a Ruby program**
+Running the command:
+  ruby -cw "file name" will help you check for syntax errors
+    -c flag means "check for syntax errors"
+    -w flag will flag things that are technically legal but are questionable on grounds beyond syntax
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

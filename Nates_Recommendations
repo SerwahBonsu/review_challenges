@@ -1,0 +1,37 @@
+
+-- Re-read 1,2,3 and 5 from Part 1 of Well Grounded Rubyist --
+1. Defining classes
+  a. instance variables
+  b. @foo vs. attr_reader :foo
+2. Initializing instances of a class
+  a. pass args, number of arguments or as hash
+3. Composition
+  a. objects that hold other objects for example an orange tree that holds a list of oranges; Then taking it a step further by identifying a process to take an orange from a tree.
+4. Class methods vs instance methods (related: 'self')
+5. Scope (local, instance, global) read the doc linked in the P1 guide
+
+
+
+-- Re-read 9 and 10 of Part 2 of Well Grounded --
+4. Hash syntax (=> vs ':')
+5. How an instance & class relate
+7. Reasons for Array vs Hash
+9. Picking the 'best' enumerable method
+
+Deliverables:
+You want a cheat sheet with my notes
+Runnable code that demonstrates the context.
+>>Make a .rb file that demonstrates these challenges
+
+
+
+
+
+
+
+
+
+
+
+
+
