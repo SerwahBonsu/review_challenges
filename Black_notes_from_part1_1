@@ -73,9 +73,9 @@ Self is a default object. Self is a role that different objects play, depending 
 
 A method is a named executable routine whose execution the object has the ability to trigger.
 >>Note on objects
-  Ruby sees all data structures -- from arrays to strings to integers as objects.s
+  Ruby sees all data structures -- from arrays to strings to integers as objects.
 >>Objects are represented by literal constructors -- such as quotation marks for strings or by variables that they have been bound
->>Message sending is achieved via the special dot operator in that the message to the right of the dot is sent to the object to the left of the dot
+>>Message sending is achieved via the special dot operator in that the message to the right of the dot is sent to the object to the left of the dot.
   Example:
     x = "100".to_i
 
@@ -103,13 +103,13 @@ A method is a named executable routine whose execution the object has the abilit
 
 **Class**
 
-Classes define clusters of behaviors or functionality and every object is an instan ce of exactly one class.
+Classes define clusters of behaviors or functionality and every object is an instance of exactly one class.
   Ruby has built-in classes which represent foundational data types:
     >> String
     >> Array
     >> Fixnum
 - Every time you create a string object you have created an instance of the String class
-- A class creates an object through the process known as instantiation; but the object,thereafter, has a life of its own and after that an object has a life of its own.
+- A class creates an object through the process known as instantiation; but the object,thereafter, has a life of its own.
 
 **Running a Ruby program**
 Running the command:

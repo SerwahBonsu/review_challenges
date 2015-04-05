@@ -1,0 +1,71 @@
+**Self**
+There’s always one (and only one) current object or self.
+
+What are the key blocks you would be in where self could be called:
+
+There’s the top level (before you’ve entered any other context, such as a class definition). The term top-level refers to program code written outside of any class- or module- definition block. If you open a brand-new text file and type:
+  x=1
+you’ve created a top-level local variable x.
+
+  Example:
+  Any code outside of other blocks
+
+  What is self?
+  main (built-in top-level default object)
+
+>There are class-definition blocks
+  Example:
+    class C
+      self
+
+  >>What is self? the class object C
+
+
+>module-definition blocks
+  Example:
+    module M
+      self
+  >>What is self? the module object M
+
+>method-definition blocks.
+  Example:
+  class C
+   def method_name
+     self
+
+     >>What is self? An instance of C, responding to method_name
+
+
+Instance-method definition in a module:
+  module M
+     def method_name
+       self
+
+       >>What is self? ■ Individual object extended by M ■ Instance of class that mixes in M
+
+Singleton method on a specific object: def obj.method_name
+  self
+
+    >>What is self? obj
+
+
+Self rules
+
+ -- A special rule governs method calls: if the receiver of the message is self, you can omit the receiver and the dot. Ruby will use self as the default receiver, meaning the message you send will be sent to self. It is for these and other reasons that you shouldn't give a method and a local variable the same name
+
+ -- A simple rule governs instance variables and their resolution: every instance variable you’ll ever see in a Ruby program belongs to whatever object is the current object (self) at that point in the program.
+
+ - Self and scope are similar in that they both change over the course of a program,
+
+
+**Scope**
+
+Global scope is scope that covers the entire program. Global scope is enjoyed by global variables, which are recognizable by their initial dollar-sign ($) character. Global Scope is rarely a good or appropriate choice.
+
+Local Scope - Local scope is a basic layer of the fabric of every Ruby program. At any given moment, your program is in a particular local scope. The main thing that changes from one local scope to another is your supply of local variables.
+
+Rules of Local Scope:
+
+    >>The top level (outside of all definition blocks) has its own local scope
+    >>Every class or module-definition block (class, module) has its own local scope even nested class-/module-definition blocks.
+    >>Every method definition (def) has its own local scope; more precisely, every call to a method generates a new local scope, with all local variables reset to an undefined state.

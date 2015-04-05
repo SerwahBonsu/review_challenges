@@ -11,7 +11,7 @@ Example:
 
 Notes
   ■ The dot (.) is the message-sending operator. The message on the right is sent to the object (or receiver, as it’s often called in this role) on the left.
-  ■ The receiver can be, and often is, represented by a variable that stands in for an   object. But a receiver can also be a literal object construct—for example, a string in quotation marks.
+  ■ The receiver can be, and often is, represented by a variable that stands in for an object. But a receiver can also be a literal object construct—for example, a string in quotation marks.
   ■ In practice, the message being sent is almost always the name of a method (like talk, the method defined earlier). The object always tries to act on the assumption that the message is the name of a method. If there’s no method by that name, error-handling measures are taken.
 
 **Method Arguments**
@@ -19,7 +19,7 @@ Key terms:
 formal parameters: the variables listed in the method definition are the method’s formal parameters
 
 Arguments:
-the variables listed in the method definition are the method’s formal parameters
+the actual number, element, string etc. passed during the method call
 
 Example:
 
@@ -157,7 +157,7 @@ def broken_args(x, *y, z=1, a, b)
   end
 
 Do:
-add * (called splat, star or argument sponge) if you need to supply multiple argumes
+add * (called splat, star or argument sponge) if you need to supply multiple arguments
   def two_or_more(a,b,*c)
    puts "I require two or more arguments!"
    puts "And sure enough, I got: "

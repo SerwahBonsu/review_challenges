@@ -1,0 +1,60 @@
+1. What is a singleton method? Black describes ticket.price in my method_practice.rb file as one? I thought it might be more specific to a method needed to arrive at a certain result like "select" or "each".
+
+2. Why does "nil" print after so many things?
+
+Executed:
+class C
+  def m
+    puts "First definition of method m"
+  end
+
+  def m
+    puts "Second definition of method m"
+  end
+end
+
+p C.new.m
+
+Output:
+Second definition of method m
+nil
+
+class C
+  def show_var
+    @v = "I am an instance variable initialized to a string."
+    puts @v
+  end
+  @v = "Instance variables can appear anywhere...."
+end
+
+# p C.new.show_var
+
+Output:
+I am an instance variable initialized to a string.
+nil
+
+I am still unclear on the differences between instance methods and class methods? Does something become an instance method once it is called on the variable assigned to the class instance?
+
+I get that Ticket.new is a class method
+
+But are all the other methods i.e. price, instance methods?
+
+I may just be getting bogged in the language here.
+
+I really want to go over the order in which 1 and 2 are printed in the below example:
+
+    class C
+        a = 1
+      def local_a
+        a=2
+      puts a
+      end
+      puts a
+    end
+
+    c = C.new
+    c.local_a
+
+    Output
+    1
+    2

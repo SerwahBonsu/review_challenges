@@ -1,9 +1,9 @@
 
 -- Re-read 1,2,3 and 5 from Part 1 of Well Grounded Rubyist --
 1. Defining classes
-  a. instance variables
-  b. @foo vs. attr_reader :foo
-2. Initializing instances of a class
+  a. instance variables - DONE
+  b. @foo vs. attr_reader :foo - DONE
+2. Initializing instances of a class - DONE
   a. pass args, number of arguments or as hash
 3. Composition
   a. objects that hold other objects for example an orange tree that holds a list of oranges; Then taking it a step further by identifying a process to take an orange from a tree.

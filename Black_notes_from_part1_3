@@ -1,0 +1,218 @@
+Defining a class lets you group behaviors (methods) into convenient bundles, so that you can quickly create many objects that behave essentially the same way.
+
+**Classes and Instances**
+- Classes exist for the purposes of being instantiated
+>>instantiation is having an object created that is an instance of a class
+>>The new method (Object.new) is a constructor. A constructor is a method which has a purpose of manufacturing and returning a new instance of a class.
+
+The following code...:
+OPTION A:
+  class C
+    def x
+    end
+  end
+
+  class C
+    def y
+    end
+  end
+
+is equal to the following code:
+OPTION B:
+  class C
+    def x
+    end
+    def y
+    end
+  end
+
+However, we would need a really good reason to go with OPTION A. This usually happens because we have the Class across different files.
+
+**Instance variables and object state**
+these serve the purpose of storing information for individual objects, always starting with a single at sign and after that character they take on the same convention as local variables
+-- IMPORTANT DIFFERENCES B/T an INSTANCE VARIABLE & LOCAL VARIABLE:
+>>an instance variable can start with a capital letter after the @sign. However it cannot have a digit after the @ sign.
+
+They are also a storage and retrieval mechanism in that they enable individual objects to remember state -- read: saved information -- and give us a way to query. Like other variables you assign values to them and read those values back. You can add them together, print them out and so on. Overall, we can create, naipulate, compare and examine any number of instances of the class with instance variables.
+
+But they have a few differences to point out from local variables: they are only visible to the object to which they belong; an instance variable initialized in one method inside a class can be used by any method defined within the class.
+
+Setter Methods
+  This is for when you need to set or change an object's state at some point in the program other than the initialize method.
+    NOTE: you can change any instance method's values in any method.
+
+    An example of this? Ticket discounts!
+
+      def discount(percent)
+        @price = @price * (100 - percent) / 100.0
+      end
+
+      ANOTHER EXAMPLE:
+
+         # class Person
+          #   def set_name(string)
+          #     puts "Setting person's name..."
+          #     @name = string
+          #   end
+          #   def get_name
+          #     puts "Returning the person's name..."
+          #     @name
+          #   end
+          # end
+
+          # joe = Person.new
+          # joe.set_name("Joe")
+          # puts joe.get_name
+
+However, the most common case is the simplest: calling a setter method with an argument and setting the most appropriate instance variable to that argument.
+
+**Unleashed Setter Methods**
+
+Uses of including "=" in a method
+
+Example: To filter whether there are many decimal place numbers
+    class Ticket
+      def price=(amount)
+        if (amount * 100).to_i == amount * 100
+          @price = amount
+        else
+          puts "The price seems to be malformed"
+        end
+      end
+      def price
+        @price
+      end
+      end
+
+To standardize the date returned
+
+class TravelAgentSession
+  def year=(y)
+    @year = y.to_i
+  if @year < 100
+        @year = @year + 2000
+  end
+  end
+end
+
+month, day, year = date.split('/')
+self.year = year
+
+Things to note about these types of setters
+
+-Ruby doesn't police semantics
+-Setters like this evaluate to what is on the right hand side instead of the last line
+
+**Attributes and the attr_* method family**
+
+The attr_reader (attribute reader) method automatically writes for you the kind of method we’ve just been looking at.
+
+    Example of Reader:
+
+    class Ticket
+          attr_reader :venue, :date, :price
+    end
+
+    Example:
+    class Ticket
+      attr_writer :price
+    end
+
+    With that single line, we wrote (or, rather, Ruby wrote for us) our price = setter
+
+**Inheritance and the Ruby class hierarchy**
+
+Inheritance is a kind of downward-chaining relationship between two classes (the super- class and the subclass), whereby one class “inherits” from another and the instances of the subclass acquire the behaviors—the methods—defined in the superclass.
+
+Code Example:
+
+class Publication
+  attr_accessor :publisher
+end
+class Magazine < Publication
+  attr_accessor :editor
+end
+
+class Ezine < Magazine
+end
+
+Because every publi- cation object has publisher and publisher= methods (thanks to attr_accessor :publisher), every magazine object has those methods too. In addition, magazine objects have editor and editor= methods Instances of Ezine have both publisher and editor attributes, as defined in the superclass and super-superclass of Ezine.
+
+Here is the Hierarchy:
+
+ Object < BasicObject
+
+ Class < Module
+
+**Class Objects**
+
+classes are objects, instances of the class called Class.
+More specifically:
+  Every object has an internal record of what class it’s an instance of, and the internal record inside the object Class points back to Class itself.
+
+   Classes get their methods from three places:
+
+   1. From their class
+    Example:
+    Ticket, for example, is an instance of Class, and Class defines an instance method called new. That’s why we can write
+    Ticket.new
+
+
+   2. From the superclass and earlier ancestors of their class
+    The superclass of Class is Module. Instances of Class therefore have access to the instance methods defined in Module; among these are the attr_accessor family of methods. That’s why we can write
+        class Ticket
+          attr_reader :venue, :date
+          attr_accessor :price
+        end
+   3. From their own store of singleton methods (the “talk” in def obj.talk)
+
+    A singleton method defined on a class object is commonly referred to as a class method of the class on which it’s defined.
+
+    Example:
+
+      def Ticket.most_expensive(*tickets)
+          tickets.max_by(&:price)
+      end
+
+      The message most_expensive goes to the class Ticket, not to a particular ticket.
+
+
+**Why write a Class Method?**
+
+1. Necessity -- Some operations pertaining to a class can’t be performed by individual instances of that class. For example: We call Ticket.new because, until we’ve created an individual ticket, we can’t send it any messages! -- Read methods!
+
+2. Sheer logic -  It makes sense for open to be a class method of File: you’re requesting the creation of an individual object from the class. The class is acting as a point of departure for the objects it creates.
+
+**Constants**'
+
+How to use and call a constant:
+
+This constant is used to ensure something is included: Check out the notation
+
+class Ticket
+  VENUES = ["Convention Center", "Fairgrounds", "Town Hall"]
+end
+puts "We've closed the class definition."
+puts "So we have to use the path notation to reach the constant."
+puts "The venues are:"
+puts Ticket::VENUES
+
+
+The 2 kinds of change in ruby:
+
+1. changing the mapping of identifiers to objects (assignment)
+2. changing the state or contents of an object.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
